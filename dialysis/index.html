@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Free Dialysis Staff Tools: Break Planner, Conversions, Fluid Math</title>
+<meta name="description" content="Free tools for dialysis staff: break planner, unit conversions, fluid arithmetic and treatment countdown. Opening or reloading requires internet."><link rel="canonical" href="https://nderkowski.github.io/pulseco-tools/dialysis/">
+<meta property="og:title" content="Free Dialysis Staff Tools: Break Planner, Conversions, Fluid Math"><meta property="og:description" content="Free tools for dialysis staff: break planner, unit conversions, fluid arithmetic and treatment countdown. Opening or reloading requires internet."><meta property="og:type" content="website"><meta property="og:url" content="https://nderkowski.github.io/pulseco-tools/dialysis/"><meta property="og:image" content="https://nderkowski.github.io/pulseco-tools/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="PulseCo free tools for dialysis and nursing staff"><meta name="theme-color" content="#0f4c5c"><link rel="icon" href="../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Free Dialysis Staff Tools","description":"Shift break planner, unit conversions, fluid-removal arithmetic and treatment end-time countdown for dialysis staff.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"creator":{"@type":"Organization","name":"PulseCo Creations"}}
+</script>
+<style>
+:root{--teal:#0f4c5c;--deep:#0a3642;--coral:#b4472b;--cream:#fbf6ee;--mist:#cfe0e3;--ink:#1f2d33}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font:1rem/1.5 "Liberation Sans",Arial,sans-serif}
+header{background:var(--teal);color:var(--cream);padding:1.25rem 1rem}
+header h1{margin:0;font:italic 700 1.6rem/1.2 "Liberation Serif",Georgia,serif}
+header p{margin:.25rem 0 0;color:var(--mist)}
+main{max-width:46rem;margin:0 auto;padding:1rem}
+section{background:#fff;border:1px solid var(--mist);border-radius:.5rem;padding:1rem;margin:0 0 1rem}
+h2{margin:0 0 .25rem;color:var(--deep);font-size:1.2rem}
+.how{margin:0 0 .75rem;font-size:.9rem;color:#44565c}
+.row{display:flex;flex-wrap:wrap;gap:.75rem;margin:.5rem 0}
+label{display:flex;flex-direction:column;font-size:.85rem;font-weight:700;gap:.2rem;flex:1 1 7rem}
+input{font:inherit;padding:.5rem;border:1px solid #6b8288;border-radius:.3rem;min-height:2.75rem;width:100%}
+input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+button{font:inherit;font-weight:700;background:var(--teal);color:#fff;border:0;border-radius:.3rem;padding:.5rem 1rem;min-height:2.75rem;cursor:pointer}
+.out{margin:.5rem 0 0;padding:.5rem .75rem;background:var(--mist);border-radius:.3rem;min-height:2.5rem}
+.out strong{color:var(--deep)}
+.note{font-size:.85rem;border-left:4px solid var(--coral);padding:.25rem .75rem;margin:.5rem 0 0;background:var(--cream)}
+footer{background:var(--deep);color:var(--cream);padding:1.25rem 1rem;text-align:center;font-size:.9rem}
+footer a{color:#fff;margin:0 .5rem;display:inline-block;padding:.4rem 0}
+footer p{max-width:42rem;margin:.5rem auto}
+</style>
+</head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header><nav aria-label="Tools"><a href="../index.html">All tools</a><a href="../dialysis/">Shift tools</a><a href="../fluid-removal-calculator/">Fluid arithmetic</a><a href="../treatment-end-time/">End time</a><a href="../nurse-unit-converter/">Unit converter</a></nav>
+<h1>Free Dialysis Staff Tools</h1>
+<p>Quick arithmetic for the unit, on your phone. Once loaded, calculations run without a connection. Opening or reloading the page requires internet.</p>
+</header>
+<main id="main">
+
+<section aria-labelledby="t1">
+<h2 id="t1">Shift and break planner</h2>
+<p class="how">Enter your shift start, its length and how many breaks; you get evenly spaced break times.</p>
+<div class="row">
+<label>Shift start<input id="b-start" type="time" value="07:00"></label>
+<label>Length (hours)<input id="b-len" type="number" inputmode="decimal" min="1" max="24" step="0.25" value="12"></label>
+<label>Breaks<input id="b-n" type="number" inputmode="numeric" min="1" max="10" step="1" value="2"></label>
+<label>Break (min)<input id="b-min" type="number" inputmode="numeric" min="0" step="5" value="30"></label>
+</div>
+<div class="out" id="b-out" aria-live="polite"></div>
+</section>
+
+<section aria-labelledby="t2">
+<h2 id="t2">Unit conversions</h2>
+<p class="how">Type in any box; the paired box updates.</p>
+<div class="row">
+<label>Pounds (lb)<input id="c-lb" type="number" inputmode="decimal" step="any"></label>
+<label>Kilograms (kg)<input id="c-kg" type="number" inputmode="decimal" step="any"></label>
+</div>
+<div class="row">
+<label>Fahrenheit (°F)<input id="c-f" type="number" inputmode="decimal" step="any"></label>
+<label>Celsius (°C)<input id="c-c" type="number" inputmode="decimal" step="any"></label>
+</div>
+<div class="row">
+<label>Milliliters (mL)<input id="c-ml" type="number" inputmode="decimal" step="any"></label>
+<label>US fluid ounces (fl oz)<input id="c-oz" type="number" inputmode="decimal" step="any"></label>
+</div>
+<div class="row">
+<label>Inches (in)<input id="c-in" type="number" inputmode="decimal" step="any"></label>
+<label>Centimeters (cm)<input id="c-cm" type="number" inputmode="decimal" step="any"></label>
+</div>
+</section>
+
+<section aria-labelledby="t3">
+<h2 id="t3">Fluid-removal arithmetic</h2>
+<p class="how">Enter pre-weight, target weight (both kg) and run time; it subtracts and divides. Nothing more.</p>
+<div class="row">
+<label>Pre-weight (kg)<input id="f-pre" type="number" inputmode="decimal" step="any"></label>
+<label>Target weight (kg)<input id="f-dry" type="number" inputmode="decimal" step="any"></label>
+<label>Run time (hours)<input id="f-run" type="number" inputmode="decimal" step="any" value="4"></label>
+</div>
+<div class="out" id="f-out" aria-live="polite"></div>
+<p class="note"><strong>Arithmetic only; follow your unit's orders and policy.</strong> For educational and organizational use only. Not medical advice. Follow your facility policy and physician orders.</p>
+</section>
+
+<section aria-labelledby="t4">
+<h2 id="t4">Treatment end time and countdown</h2>
+<p class="how">Enter today's start time and run length; it shows the end time and counts down to it, including runs ending after midnight.</p>
+<div class="row">
+<label>Start time<input id="e-start" type="time"></label>
+<label>Run (hours)<input id="e-h" type="number" inputmode="numeric" min="0" step="1" value="4"></label>
+<label>Run (min)<input id="e-m" type="number" inputmode="numeric" min="0" max="59" step="5" value="0"></label>
+</div>
+<div class="out" id="e-out" aria-live="polite"></div>
+<p class="note">A clock only. It does not say a treatment is complete.</p>
+</section>
+
+</main>
+<footer>
+<p>
+<a href="https://empire-8.kit.com/27782c548a">Get the free card</a>
+<a href="https://www.etsy.com/shop/PulseCoCreations">Etsy shop</a>
+<a href="https://payhip.com/PulseCoCreations">Payhip</a>
+<a href="https://pulsecocreations.gumroad.com/">Gumroad</a>
+</p>
+<p>For educational and organizational use only. Not medical advice; follow your facility policy and clinical judgment. Arithmetic only; follow your unit's orders and policy.</p>
+<p>Made by a dialysis RN</p>
+<p>Made with artificial intelligence-assisted tools.</p>
+</footer>
+<script type="module">
+import { breakSchedule, lbToKg, kgToLb, fToC, cToF, mlToOz, ozToMl, inToCm, cmToIn, fluidRemoval, treatmentEnd, parseTime } from './calc.mjs';
+const $ = id => document.getElementById(id);
+const show = (el, html) => { el.innerHTML = html; };
+const bad = 'Check the numbers above.';
+
+function planBreaks() {
+  const s = breakSchedule($('b-start').value, $('b-len').value, $('b-n').value, $('b-min').value);
+  show($('b-out'), s ? s.map(b => `Break ${b.number}: <strong>${b.from}</strong> to <strong>${b.to}</strong>`).join('<br>') : bad);
+}
+for (const id of ['b-start', 'b-len', 'b-n', 'b-min']) $(id).addEventListener('input', planBreaks);
+planBreaks();
+
+const pairs = [['c-lb', 'c-kg', lbToKg, kgToLb], ['c-f', 'c-c', fToC, cToF], ['c-ml', 'c-oz', mlToOz, ozToMl], ['c-in', 'c-cm', inToCm, cmToIn]];
+for (const [a, b, ab, ba] of pairs) {
+  $(a).addEventListener('input', () => { const v = ab($(a).value); $(b).value = v === null ? '' : v; });
+  $(b).addEventListener('input', () => { const v = ba($(b).value); $(a).value = v === null ? '' : v; });
+}
+
+function fluid() {
+  const r = fluidRemoval($('f-pre').value, $('f-dry').value, $('f-run').value);
+  if (!r) return show($('f-out'), 'Enter pre-weight, target weight and run time.');
+  show($('f-out'), r.belowDry
+    ? `Pre-weight is <strong>${-r.kg} kg below</strong> target weight.`
+    : `<strong>${r.kg} kg</strong> = <strong>${r.ml} mL</strong> over the run = <strong>${r.mlPerHour} mL/hr</strong>`);
+}
+for (const id of ['f-pre', 'f-dry', 'f-run']) $(id).addEventListener('input', fluid);
+fluid();
+
+let timer;
+function endTime() {
+  clearInterval(timer);
+  const r = treatmentEnd($('e-start').value, $('e-h').value, $('e-m').value);
+  if (!r) return show($('e-out'), 'Enter a start time and run length.');
+  const start = parseTime($('e-start').value);
+  const deadline = new Date();
+  deadline.setHours(Math.floor(start / 60), start % 60, 0, 0);
+  const deadlineMs = deadline.getTime() + r.totalMinutes * 60000;
+  const end = new Date(deadlineMs);
+  const endLabel = `${String(end.getHours()).padStart(2, '0')}:${String(end.getMinutes()).padStart(2, '0')}`;
+  const nextDay = end.toDateString() !== deadline.toDateString();
+  const tick = () => {
+    const left = Math.max(0, Math.ceil((deadlineMs - Date.now()) / 60000));
+    const label = left === 0 ? ' <strong>Planned end time reached</strong>.' : ` Time left: <strong>${Math.floor(left / 60)} h ${left % 60} min</strong>.`;
+    show($('e-out'), `Ends at <strong>${endLabel}</strong>${nextDay ? ' (next day)' : ''}.${label}`);
+    if (left === 0) clearInterval(timer);
+  };
+  timer = setInterval(tick, 30000);
+  tick();
+}
+for (const id of ['e-start', 'e-h', 'e-m']) $(id).addEventListener('input', endTime);
+endTime();
+</script>
+</body>
+</html>

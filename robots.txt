@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nderkowski.github.io/pulseco-tools/sitemap.xml
